@@ -1,24 +1,20 @@
-import { useEffect, useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import VideoDetail from './pages/See_Video'
+import Admin from './pages/Admin'
 
 function App() {
-  const [message, setMessage] = useState('Cargando...')
-  
-  useEffect(() => {
-    // Import.meta.env es la forma en que Vite accede a las variables
-    const apiUrl = import.meta.env.VITE_API_URL;
-
-    fetch(apiUrl)
-      .then(res => res.json())
-      .then(data => setMessage(data.message))
-      .catch(err => setMessage('Error conectando al backend: ' + err.message))
-  }, [])
-
-  return (
-    <div style={{ padding: '2rem', textAlign: 'center' }}>
-      <h1>YouTube Clone (Testing Infra)</h1>
-      <p>Estado del Backend: <strong>{message}</strong></p>
-    </div>
-  )
+    return (
+        <BrowserRouter>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/video/:id" element={<VideoDetail />} />
+                <Route path="/admin" element={<Admin />} />
+            </Routes>
+        </BrowserRouter>
+    )
 }
 
 export default App

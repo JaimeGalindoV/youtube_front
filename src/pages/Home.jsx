@@ -29,6 +29,13 @@ function Home() {
 
     if (error) return (
         <div style={{ color: '#aaaaaa', textAlign: 'center', marginTop: '4rem' }}>
+            <p style={{ fontSize: '48px', marginBottom: '16px' }}>🔧</p>
+            <p style={{ fontSize: '16px' }}>Servidor en mantenimiento</p>
+        </div>
+    )
+
+    if (videos.length === 0) return (
+        <div style={{ color: '#aaaaaa', textAlign: 'center', marginTop: '4rem' }}>
             <p style={{ fontSize: '48px', marginBottom: '16px' }}>📭</p>
             <p style={{ fontSize: '16px' }}>No hay videos disponibles por el momento</p>
         </div>

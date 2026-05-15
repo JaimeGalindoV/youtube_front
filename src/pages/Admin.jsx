@@ -79,7 +79,6 @@ function ModalEditar({ video, onClose, onGuardar }) {
     const [form, setForm] = useState({
         title: video.title,
         channel: video.channel,
-        duration: video.duration,
         description: '', // descripcion se llama desde /videos/{id}, por lo que se define abajo
     })
     const [thumbnail, setThumbnail] = useState(null)
@@ -95,7 +94,6 @@ function ModalEditar({ video, onClose, onGuardar }) {
             setForm({
                 title: data.title,
                 channel: data.channel,
-                duration: data.duration,
                 description: data.description || '',
             })
         })
@@ -115,7 +113,6 @@ function ModalEditar({ video, onClose, onGuardar }) {
         const data = new FormData()
         if (form.title) data.append('title', form.title)
         if (form.channel) data.append('channel', form.channel)
-        if (form.duration) data.append('duration', form.duration)
         if (form.description) data.append('description', form.description)
         if (thumbnail) data.append('thumbnail', thumbnail)
 
@@ -211,7 +208,6 @@ function ModalEditar({ video, onClose, onGuardar }) {
                     {[
                         { label: 'Título', name: 'title' },
                         { label: 'Canal', name: 'channel' },
-                        { label: 'Duración', name: 'duration' },
                     ].map(campo => (
                         <div key={campo.name} style={{ marginBottom: '16px', textAlign: 'left' }}>
                             <label style={{ color: '#aaaaaa', fontSize: '14px', display: 'block', marginBottom: '6px' }}>{campo.label}</label>
@@ -318,7 +314,6 @@ function ModalCrear({ onClose, onPublicar }) {
     const [form, setForm] = useState({
         title: '',
         channel: '',
-        duration: '',
         description: '',
     })
     const [video, setVideo] = useState(null)               // almacena el video seleccionado
@@ -343,7 +338,6 @@ function ModalCrear({ onClose, onPublicar }) {
         const data = new FormData()
         data.append('title', form.title)
         data.append('channel', form.channel)
-        data.append('duration', form.duration)
         data.append('description', form.description)
         data.append('video', video)
         if (thumbnail) data.append('thumbnail', thumbnail) // no hay problema si el thumbnail esta vacio
@@ -479,7 +473,6 @@ function ModalCrear({ onClose, onPublicar }) {
                 {[
                     { label: 'Título', name: 'title', required: true },
                     { label: 'Canal', name: 'channel' },
-                    { label: 'Duración', name: 'duration' },
                 ].map(campo => (
                     <div key={campo.name} style={{ marginBottom: '14px' }}>
                         <label style={{ color: '#aaaaaa', fontSize: '14px', display: 'block', marginBottom: '6px', textAlign: 'left' }}>

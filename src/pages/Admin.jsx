@@ -121,14 +121,19 @@ function ModalEditar({ video, onClose, onGuardar }) {
 
         fetch(`${apiUrl}/videos/${video.id}`, { method: 'PUT', body: data })
             .then(res => {
+                console.log('Status:', res.status)
                 if (!res.ok) throw new Error('Error al guardar')
                 return res.json()
             })
             .then(() => {
+                console.log('Respuesta:', data)
                 onGuardar()
                 onClose()
             })
-            .catch(() => setGuardando(false))
+            .catch(err => {
+                console.log('Error:', err)
+                setGuardando(false)
+            })
     }
 
     // Elimina el video seleccionado

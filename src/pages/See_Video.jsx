@@ -24,6 +24,15 @@ function VideoDetail() {
                 if (!res.ok) throw new Error('Error cargando videos')
                 return res.json()
             }),
+            // Suma una vista
+            fetch(`${apiUrl}/videos/${id}`, {
+                method: 'PUT',
+                body: (() => {
+                    const d = new FormData()
+                    d.append('increment_views', 'true')
+                    return d
+                })()
+            }),
         ])
             .then(([videoDetalle, todosLosVideos]) => {
                 setVideo(videoDetalle)

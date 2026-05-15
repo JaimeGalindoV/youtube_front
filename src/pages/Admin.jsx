@@ -111,17 +111,15 @@ function ModalEditar({ video, onClose, onGuardar }) {
         const apiUrl = import.meta.env.VITE_API_URL
         setGuardando(true)
 
-        // Guarda los datos como JSON
-        fetch(`${apiUrl}/videos/${video.id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-            title: form.title,
-            channel: form.channel,
-            duration: form.duration,
-            description: form.description,
-            }),
-        })
+        // Guarda los datos en formato Form
+        const data = new FormData()
+        if (form.title) data.append('title', form.title)
+        if (form.channel) data.append('channel', form.channel)
+        if (form.duration) data.append('duration', form.duration)
+        if (form.description) data.append('description', form.description)
+        if (thumbnail) data.append('thumbnail', thumbnail)
+
+        fetch(`${apiUrl}/videos/${video.id}`, { method: 'PUT', body: data })
             .then(res => {
                 if (!res.ok) throw new Error('Error al guardar')
                 return res.json()

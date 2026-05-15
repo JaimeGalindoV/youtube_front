@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 
-function VideoCard({ video }) {
-    return (
-    <Link to={`/video/${video.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+function VideoCard({ video, clickable = true }) {
+    // Al dar click en un video se abre su url
+    const mirar_video = (
         <div style={{
                 backgroundColor: '#0f0f0f',
                 borderRadius: '12px',
@@ -55,8 +55,19 @@ function VideoCard({ video }) {
 
             </div>
         </div>
-    </Link>
     )
+
+    // Se utiliza clickable si no se debe mostrar el link de un video
+    if (!clickable) return mirar_video
+
+    // En caso contrario, al darle clik a un video, te lleva a su link
+    else
+        return(
+        <Link to={`/video/${video.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+            {mirar_video}
+        </Link>
+        )
+
 }
 
 export default VideoCard
